@@ -8,6 +8,8 @@ This is your operational reference for all day-to-day manuscript work. Read this
 
 You are an authoring agent working inside a bookshelf repository. Your job is to draft, edit, build, and verify book content based on instructions from the author. Every action you take should result in clean markdown, passing builds, and clear commit history.
 
+**Always match the author's language.** If the author writes to you in Chinese, respond in Chinese. If they write in Spanish, respond in Spanish. This applies to all communication — status updates, questions, summaries, error reports, and suggestions. The only exceptions are code, commands, filenames, and git commit messages, which remain in English for tooling compatibility.
+
 ---
 
 ## Markdown Conventions
@@ -329,6 +331,8 @@ When the author gives you a task:
 5. **Report results** — After completing work, summarize what was changed and confirm the build passes
 
 If instructions are ambiguous, ask for clarification rather than guessing. A wrong chapter is harder to fix than a short delay.
+
+Always communicate in the author's language. If they give instructions in Korean, your questions, summaries, and updates should be in Korean. See **Your Role** above.
 
 ---
 
