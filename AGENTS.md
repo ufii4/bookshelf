@@ -149,9 +149,105 @@ make html    # HTML only
 
 ---
 
-## Commit Practices
+## Version Control
 
-### When to Commit
+This project uses git for version control. If the repository is not yet initialized, set it up before doing any manuscript work.
+
+### Initial Git Setup
+
+If the project directory is not already a git repository:
+
+```bash
+git init
+git add .
+git commit -m "Initialize bookshelf project"
+```
+
+Configure your identity if not already set globally:
+
+```bash
+git config user.name "Agent"
+git config user.email "agent@bookshelf"
+```
+
+### Remote Repository
+
+If the author provides a remote (GitHub, GitLab, etc.), connect it:
+
+```bash
+git remote add origin <remote-url>
+git push -u origin main
+```
+
+If a remote is already configured, pull before starting work to ensure you have the latest content:
+
+```bash
+git pull origin main
+```
+
+> Always confirm the remote exists before pushing. Run `git remote -v` to check.
+
+### Branching Strategy
+
+The `main` branch holds the current stable manuscript. All work happens on branches:
+
+| Branch pattern           | Purpose                                          |
+|--------------------------|--------------------------------------------------|
+| `main`                   | Stable, build-passing manuscript                 |
+| `draft/<chapter>`        | New chapter drafts (e.g., `draft/ch03`)          |
+| `edit/<chapter>`         | Editing passes on existing chapters              |
+| `feature/<description>`  | Structural changes — new sections, reordering    |
+| `translate/<lang>`       | Full translation into a language                 |
+
+Create a branch before starting work:
+
+```bash
+git checkout -b draft/ch03
+```
+
+When work is complete and the build passes, merge back into `main`:
+
+```bash
+git checkout main
+git merge draft/ch03
+git branch -d draft/ch03
+```
+
+> **CRITICAL**: Never commit directly to `main` unless the author explicitly instructs you to. Always branch first.
+
+### Tagging Milestones
+
+Use annotated tags to mark significant points in the manuscript's lifecycle:
+
+```bash
+# First complete draft
+git tag -a v1.0-draft -m "First complete draft of all chapters"
+
+# After editorial review
+git tag -a v1.0-edited -m "Post-editorial review draft"
+
+# Final version sent to publisher/distribution
+git tag -a v1.0 -m "Final manuscript for publication"
+
+# Push tags to remote
+git push origin --tags
+```
+
+Tag naming convention:
+
+| Tag                | Meaning                                     |
+|--------------------|---------------------------------------------|
+| `v1.0-draft`      | First complete draft                        |
+| `v1.0-edited`     | After editing pass                          |
+| `v1.0-proofread`  | After proofreading                          |
+| `v1.0`            | Final for publication                       |
+| `v2.0-draft`      | Second edition draft                        |
+
+Tags are permanent markers. Do not delete or move tags after pushing them.
+
+### Commit Practices
+
+#### When to Commit
 
 - After completing a full chapter draft
 - After a significant editing pass on a chapter
@@ -159,7 +255,7 @@ make html    # HTML only
 - After modifying `metadata.yaml` or `book.txt`
 - **Never** commit with a broken build
 
-### Commit Message Format
+#### Commit Message Format
 
 Use clear, descriptive messages. Start with a verb in imperative mood:
 
@@ -171,18 +267,36 @@ Update metadata.yaml with correct subtitle
 Add cover image to assets
 ```
 
-### What to Commit
+#### What to Commit
 
 - All `manuscript/*.md` files
 - `metadata.yaml`, `book.txt`, `Makefile`
 - `assets/images/*`, `assets/fonts/*`, `templates/*`
 - `AGENTS.md`, `SETUP_PIPELINE.md`
 
-### What NOT to Commit
+#### What NOT to Commit
 
 - `build/` directory — this is in `.gitignore`
 - OS artifacts (`.DS_Store`, `Thumbs.db`)
 - Editor temporary files
+
+### Viewing History
+
+Useful commands for understanding manuscript progress:
+
+```bash
+# See full commit log
+git log --oneline
+
+# See what changed in a specific commit
+git show <commit-hash>
+
+# See changes between two tags
+git diff v1.0-draft..v1.0-edited
+
+# See which files changed on a branch
+git diff main..draft/ch03 --name-only
+```
 
 ---
 
