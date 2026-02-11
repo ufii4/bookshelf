@@ -448,6 +448,41 @@ Template modifications are advanced. Do not modify templates unless the author e
 
 ---
 
+## Optional Skills
+
+The following skills are **not loaded by default**. Download only the ones the author requests. Each skill file contains self-contained instructions for a specific capability.
+
+| Skill                        | Description                                           | Install Command |
+|------------------------------|-------------------------------------------------------|-----------------|
+| **Proofreading & Editing**   | Structured review passes — grammar, consistency, style | See below       |
+| **Word Count & Progress**    | Chapter-level word counts, progress toward targets     | See below       |
+| **Search & Replace**         | Bulk text changes across the manuscript                | See below       |
+| **Bibliography & Citations** | Manage references and citations for non-fiction        | See below       |
+
+### Installing a Skill
+
+Download the skill file into a `skills/` directory in the project:
+
+```bash
+mkdir -p skills
+
+# Proofreading & Editing
+curl -o skills/proofreading.md https://raw.githubusercontent.com/ufii4/bookshelf/master/skills/proofreading.md
+
+# Word Count & Progress Tracking
+curl -o skills/word-count.md https://raw.githubusercontent.com/ufii4/bookshelf/master/skills/word-count.md
+
+# Search & Replace
+curl -o skills/search-replace.md https://raw.githubusercontent.com/ufii4/bookshelf/master/skills/search-replace.md
+
+# Bibliography & Citations
+curl -o skills/bibliography.md https://raw.githubusercontent.com/ufii4/bookshelf/master/skills/bibliography.md
+```
+
+After downloading a skill, **read it in full** before using it. Each skill file defines its own workflow, rules, and commit conventions.
+
+---
+
 ## Summary of Key Files
 
 | File                  | Purpose                                   | Edit Frequency |
@@ -457,5 +492,6 @@ Template modifications are advanced. Do not modify templates unless the author e
 | `book.txt`            | Chapter order manifest                    | When adding/removing chapters |
 | `Makefile`            | Build commands                            | Rarely         |
 | `translations/<lang>/`| Translated manuscripts by language code   | When translating       |
+| `skills/*.md`         | Optional skill files — downloaded on demand | Never         |
 | `AGENTS.md`           | This file — your workflow reference       | Never          |
 | `SETUP_PIPELINE.md`   | Initial repo setup (already completed)    | Never          |
