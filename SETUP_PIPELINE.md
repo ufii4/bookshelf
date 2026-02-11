@@ -243,11 +243,15 @@ Thumbs.db
 
 ---
 
-## Step 5: Read the Agent Instructions
+## Step 5: Download the Agent Instructions
 
-The day-to-day agent workflow guide lives in this repository as **[AGENTS.md](AGENTS.md)**. It contains instructions for writing, editing, building, and managing the manuscript during active work sessions.
+Once the repository structure is in place, download the day-to-day agent workflow guide. This file contains instructions for writing, editing, building, and managing the manuscript during active work sessions.
 
-**Read `AGENTS.md` in full** before beginning any manuscript work. It is your primary reference for all ongoing tasks — chapter drafting conventions, commit practices, build verification steps, and quality checks.
+```bash
+curl -o AGENTS.md https://raw.githubusercontent.com/ufii4/bookshelf/master/AGENTS.md
+```
+
+After downloading, **read `AGENTS.md` in full** before beginning any manuscript work. It is your primary reference for all ongoing tasks — chapter drafting conventions, commit practices, build verification steps, and quality checks.
 
 ---
 
@@ -312,7 +316,7 @@ ls -la build/
 
 ## What Comes Next
 
-After setup is complete and verified, all ongoing work follows the instructions in **[AGENTS.md](AGENTS.md)**. That document covers:
+After setup is complete and verified, all ongoing work follows the instructions in **AGENTS.md**. That document covers:
 
 - Chapter drafting and markdown conventions
 - Commit message standards and branching
