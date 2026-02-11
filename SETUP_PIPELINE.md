@@ -243,18 +243,11 @@ Thumbs.db
 
 ---
 
-## Step 5: Download the Agent Instructions
+## Step 5: Read the Agent Instructions
 
-Once the repository structure is in place, download the day-to-day agent workflow guide. This file contains instructions for writing, editing, building, and managing the manuscript during active work sessions.
+The day-to-day agent workflow guide lives in this repository as **[AGENTS.md](AGENTS.md)**. It contains instructions for writing, editing, building, and managing the manuscript during active work sessions.
 
-```bash
-# Download the agent workflow instructions
-curl -o AGENT.md https://raw.githubusercontent.com/bookshelf-pipeline/bookshelf/main/AGENT.md
-```
-
-> **PLACEHOLDER**: The URL above is a placeholder. Replace it with the actual hosted location of `AGENT.md` once available. The `AGENT.md` file contains all operational instructions for agents working on the manuscript day-to-day — chapter drafting conventions, commit practices, build verification steps, and quality checks.
-
-After downloading, **read `AGENT.md` in full** before beginning any manuscript work. It is your primary reference for all ongoing tasks.
+**Read `AGENTS.md` in full** before beginning any manuscript work. It is your primary reference for all ongoing tasks — chapter drafting conventions, commit practices, build verification steps, and quality checks.
 
 ---
 
@@ -319,7 +312,7 @@ ls -la build/
 
 ## What Comes Next
 
-After setup is complete and verified, all ongoing work follows the instructions in **[AGENT.md](AGENT.md)**. That document covers:
+After setup is complete and verified, all ongoing work follows the instructions in **[AGENTS.md](AGENTS.md)**. That document covers:
 
 - Chapter drafting and markdown conventions
 - Commit message standards and branching
@@ -327,4 +320,4 @@ After setup is complete and verified, all ongoing work follows the instructions 
 - Review workflows and quality checks
 - Handling images, footnotes, and cross-references
 
-**Do not begin manuscript work until you have read AGENT.md.**
+**Do not begin manuscript work until you have read AGENTS.md.**
