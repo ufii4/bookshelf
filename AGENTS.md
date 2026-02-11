@@ -231,6 +231,93 @@ Follow these steps in order:
 
 ---
 
+## Translating the Manuscript
+
+You can translate the full manuscript into another language. Translations live in a separate directory and maintain their own `book.txt` and `metadata.yaml`, keeping the source manuscript untouched.
+
+### Setting Up a Translation
+
+When the author requests a translation, create a language-specific directory using the ISO 639-1 code (e.g., `es` for Spanish, `fr` for French, `de` for German, `ja` for Japanese, `zh` for Chinese, `ar` for Arabic):
+
+```bash
+mkdir -p translations/<lang>/manuscript
+```
+
+Then copy the structural files and create language-specific versions:
+
+```bash
+# Copy the chapter manifest
+cp book.txt translations/<lang>/book.txt
+
+# Copy metadata and update for the target language
+cp metadata.yaml translations/<lang>/metadata.yaml
+```
+
+Edit `translations/<lang>/metadata.yaml` immediately after copying:
+- Update `title` and `subtitle` to the translated versions
+- Change `lang` to the target language code (e.g., `es`, `fr-FR`, `ja`)
+- Update `rights` if the translation has different rights
+- Adjust font settings — the source fonts may not support the target script
+
+### Translating Chapters
+
+Work through the manuscript **one chapter at a time**, in `book.txt` order:
+
+1. Read the source chapter in `manuscript/` in full
+2. Translate it into `translations/<lang>/manuscript/` using the same filename
+3. Preserve all markdown structure exactly — headings, emphasis, footnotes, image references, cross-reference anchors
+4. Do not add, remove, or reorder content — the translation must be a faithful mirror of the source
+5. Update image alt text to the target language
+6. Translate footnote content but keep reference numbering consistent
+
+```bash
+# Example: translating chapter 1 to Spanish
+# Read source
+# manuscript/01-chapter-one.md
+
+# Write translation to
+# translations/es/manuscript/01-chapter-one.md
+```
+
+### Translation book.txt
+
+Update the paths in `translations/<lang>/book.txt` to point to the translated files:
+
+```
+translations/es/manuscript/00-foreword.md
+translations/es/manuscript/01-chapter-one.md
+translations/es/manuscript/02-chapter-two.md
+translations/es/manuscript/03-chapter-three.md
+```
+
+### Building a Translation
+
+Build the translated version by pointing to the translation's metadata and chapter list:
+
+```bash
+# Build all formats for a translation
+CHAPTERS=$(cat translations/<lang>/book.txt)
+METADATA=translations/<lang>/metadata.yaml
+
+pandoc --metadata-file=$METADATA --toc --toc-depth=2 --number-sections -o build/book-<lang>.epub $CHAPTERS
+pandoc --metadata-file=$METADATA --toc --toc-depth=2 --number-sections --pdf-engine=xelatex -o build/book-<lang>.pdf $CHAPTERS
+pandoc --metadata-file=$METADATA --toc --toc-depth=2 --number-sections -o build/book-<lang>.docx $CHAPTERS
+pandoc --metadata-file=$METADATA --toc --toc-depth=2 --number-sections --standalone -o build/book-<lang>.html $CHAPTERS
+```
+
+Output files are named with the language suffix: `book-es.epub`, `book-fr.pdf`, etc.
+
+### Translation Rules
+
+- **Never modify the source manuscript** — translations are read-only consumers of the original
+- **Match structure exactly** — if the source has 12 chapters, the translation has 12 chapters with the same filenames
+- **Translate naturally** — produce fluent text in the target language, not word-for-word substitution. Adapt idioms, cultural references, and phrasing to read naturally for a native speaker
+- **Preserve technical accuracy** — names, dates, figures, and quoted material must remain correct
+- **Keep markdown formatting identical** — same heading levels, same emphasis patterns, same footnote structure
+- **Commit per chapter** — commit each translated chapter individually so progress is trackable
+
+---
+
 ## Templates and Styling
 
 Custom pandoc templates live in `templates/`. To use a template:
@@ -255,5 +342,6 @@ Template modifications are advanced. Do not modify templates unless the author e
 | `metadata.yaml`       | Book metadata and pandoc settings         | Rarely         |
 | `book.txt`            | Chapter order manifest                    | When adding/removing chapters |
 | `Makefile`            | Build commands                            | Rarely         |
+| `translations/<lang>/`| Translated manuscripts by language code   | When translating       |
 | `AGENTS.md`           | This file — your workflow reference       | Never          |
 | `SETUP_PIPELINE.md`   | Initial repo setup (already completed)    | Never          |
